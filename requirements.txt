@@ -3,4 +3,4 @@ pandas
 numpy
 scikit-learn
 gunicorn
-catboost==1.1.1
+catboost==1.2.7
