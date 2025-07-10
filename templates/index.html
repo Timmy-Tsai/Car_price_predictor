@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Car Price Predictor</title>
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome -->
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  
+  <!-- Simple-Icons Font (brand logos) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-icons-font@v15/font/simple-icons.min.css" />
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background-color: #f8f9fa;
+      color: #333;
+    }
+
+    nav {
+      background-color: #2c3e50;
+      padding: 15px 40px;
+      color: white;
+      text-align: center;
+      font-size: 24px;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+
+    .brand-marquee {
+      overflow: hidden;
+      background: #fff;
+      border-top: 1px solid #ddd;
+      border-bottom: 1px solid #ddd;
+      padding: 20px 0;
+      position: relative;
+    }
+
+    .marquee-track {
+      display: flex;
+      width: calc(200% + 20px);
+      animation: scroll 25s linear infinite;
+    }
+
+    .marquee-track img {
+    width: 40px;    /* same as font size for icons */
+    height: auto;   /* maintain aspect ratio */
+    margin: 0 40px;
+    opacity: 0.8;
+    transition: transform 0.3s, opacity 0.3s;
+    }
+    .marquee-track img:hover {
+    transform: scale(1.2);
+    opacity: 1;
+    }
+
+
+    .marquee-track i {
+      font-size: 40px;
+      margin: 0 40px;
+      opacity: 0.8;
+      transition: transform 0.3s, opacity 0.3s;
+    }
+
+    .marquee-track i:hover {
+      transform: scale(1.2);
+      opacity: 1;
+    }
+
+    @keyframes scroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-33.33%); }
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 30px auto;
+      background: #fff;
+      padding: 40px;
+      border-radius: 10px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    }
+
+
+    h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 28px;
+      color: #2c3e50;
+    }
+
+    p.description {
+      text-align: center;
+      font-size: 16px;
+      color: #555;
+      margin-bottom: 40px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .row {
+      display: flex;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    .row > div {
+      flex: 1;
+      min-width: 250px;
+      
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 600;
+      color: #333;
+    }
+
+    select, input[type="number"] {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 16px;
+      transition: border-color 0.3s;
+    }
+
+    select:focus, input[type="number"]:focus {
+      border-color: #3498db;
+      outline: none;
+    }
+
+    button {
+      background-color: #3498db;
+      color: white;
+      font-size: 18px;
+      border: none;
+      border-radius: 6px;
+      padding: 14px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #2980b9;
+    }
+
+    .prediction-text {
+      text-align: center;
+      font-size: 20px;
+      margin-top: 30px;
+      color: #2c3e50;
+    }
+
+    @media (max-width: 600px) {
+      .row {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav>Second-Hand Car Price Predictor</nav>
+
+  <div class="brand-marquee">
+    <div class="marquee-track">
+      <!-- Repeat logos 3 times for seamless loop -->
+      <i class="si si-audi si--color"></i>
+      <i class="si si-bmw si--color"></i>
+      <i class="si si-ford si--color"></i>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/9/90/Mercedes-Logo.svg" alt="Mercedes" />
+      <i class="si si-honda si--color"></i>
+      <i class="si si-toyota si--color"></i>
+      <i class="si si-kia si--color"></i>
+      <i class="si si-volkswagen si--color"></i>
+
+      <i class="si si-audi si--color"></i>
+      <i class="si si-bmw si--color"></i>
+      <i class="si si-ford si--color"></i>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/9/90/Mercedes-Logo.svg" alt="Mercedes" />
+      <i class="si si-honda si--color"></i>
+      <i class="si si-toyota si--color"></i>
+      <i class="si si-kia si--color"></i>
+      <i class="si si-volkswagen si--color"></i>
+
+      <i class="si si-audi si--color"></i>
+      <i class="si si-bmw si--color"></i>
+      <i class="si si-ford si--color"></i>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/9/90/Mercedes-Logo.svg" alt="Mercedes" />
+      <i class="si si-honda si--color"></i>
+      <i class="si si-toyota si--color"></i>
+      <i class="si si-kia si--color"></i>
+      <i class="si si-volkswagen si--color"></i>
+    </div>
+  </div>
+  
+  
+  
+  
+
+  <div class="container">
+    <h2>Estimate Your Car's Value</h2>
+    <p class="description">Built by Timmy using advanced machine learning algorithms. Enter details below to predict your car's price.</p>
+
+    <form action="{{ url_for('predict') }}" method="POST">
+      
+      <div class="row">
+        <div>
+          <label for="brand">Brand</label>
+          <select name="Brand" id="brand" required>
+            <option value="">Select Brand</option>
+            <option value="Audi">Audi</option>
+            <option value="BMW">BMW</option>
+            <option value="Chevrolet">Chevrolet</option>
+            <option value="Ford">Ford</option>
+            <option value="Honda">Honda</option>
+            <option value="Hyundai">Hyundai</option>
+            <option value="Kia">Kia</option>
+            <option value="Mercedes">Mercedes</option>
+            <option value="Toyota">Toyota</option>
+            <option value="Volkswagen">Volkswagen</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="model">Model</label>
+          <select name="Model" id="model" required>
+            <option value="">Select Model</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row">
+        <div>
+          <label for="fuel">Fuel Type</label>
+          <select name="Fuel" id="fuel" required>
+            <option value="">Select Fuel</option>
+            <option value="Diesel">Diesel</option>
+            <option value="Electric">Electric</option>
+            <option value="Hybrid">Hybrid</option>
+            <option value="Petrol">Petrol</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="transmission">Transmission</label>
+          <select name="Transmission" id="transmission" required>
+            <option value="">Select Transmission</option>
+            <option value="Automatic">Automatic</option>
+            <option value="Manual">Manual</option>
+            <option value="Semi-Automatic">Semi-Automatic</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row">
+        <div>
+          <label for="year">Year</label>
+          <select name="Year" id="year" required>
+            <option value="">Select Year</option>
+            <script>
+              for (let year = 2000; year <= 2023; year++) {
+                document.write(`<option value="${year}">${year}</option>`);
+              }
+            </script>
+          </select>
+        </div>
+
+        <div>
+          <label for="engineSize">Engine Size</label>
+          <input id="engineSize" name="EngineSize" type="number" step="0.1" placeholder="e.g. 2.0" required/>
+        </div>
+
+        <div>
+          <label for="mileage">Mileage (KM)</label>
+          <input id="mileage" name="Mileage" type="number" placeholder="e.g. 50000" required/>
+        </div>
+      </div>
+
+      <div class="row">
+        <div>
+          <label for="doors">Doors</label>
+          <select name="Doors" id="doors" required>
+            <option value="">Select Doors</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="OwnerCount">Owner Count</label>
+          <select name="OwnerCount" id="OwnerCount" required>
+            <option value="">Select Owners</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+        </div>
+      </div>
+
+      <button type="submit">Predict Price</button>
+    </form>
+
+    {% if prediction_text %}
+      <div class="prediction-text">{{ prediction_text }}</div>
+    {% endif %}
+
+  </div>
+
+  <script>
+    const modelOptions = {
+      "Audi": ["A3", "A4", "Q5"],
+      "BMW": ["3 Series", "5 Series", "X5"],
+      "Chevrolet": ["Equinox", "Impala", "Malibu"],
+      "Ford": ["Explorer", "Fiesta", "Focus"],
+      "Honda": ["Accord", "CR-V", "Civic"],
+      "Hyundai": ["Elantra", "Sonata", "Tucson"],
+      "Kia": ["Optima", "Rio", "Sportage"],
+      "Mercedes": ["C-Class", "E-Class", "GLA"],
+      "Toyota": ["Camry", "Corolla", "RAV4"],
+      "Volkswagen": ["Golf", "Passat", "Tiguan"]
+    };
+
+    document.getElementById("brand").addEventListener("change", function () {
+      const brand = this.value;
+      const modelSelect = document.getElementById("model");
+
+      modelSelect.innerHTML = '<option value="">Select Model</option>';
+      if (brand in modelOptions) {
+        modelOptions[brand].forEach(model => {
+          const option = document.createElement("option");
+          option.value = model;
+          option.textContent = model;
+          modelSelect.appendChild(option);
+        });
+      }
+    });
+  </script>
+
+</body>
+</html>
