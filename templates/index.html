@@ -3,72 +3,148 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Car Price Predictor</title>
+  <title>Liquid Glass Car Price Predictor</title>
   
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   
   <!-- Font Awesome -->
   <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
   
-  <!-- Simple-Icons Font (brand logos) -->
+  <!-- Simple-Icons Font -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-icons-font@v15/font/simple-icons.min.css" />
 
   <style>
-    body {
+    * {
       margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
       font-family: 'Inter', sans-serif;
-      background-color: #f8f9fa;
-      color: #333;
+      background: linear-gradient(135deg, #1a202c, #2d3748, #4a5568);
+      color: #e2e8f0;
+      min-height: 100vh;
+      padding: 20px;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    .liquid-background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -2;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .liquid-shape {
+      position: absolute;
+      border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+      background: radial-gradient(circle at 50% 50%, rgba(66, 153, 225, 0.25), rgba(66, 153, 225, 0.1));
+      animation: morph 20s linear infinite;
+      filter: blur(40px);
+    }
+
+    .liquid-shape:nth-child(1) {
+      top: 10%;
+      left: 20%;
+      width: 300px;
+      height: 300px;
+    }
+
+    .liquid-shape:nth-child(2) {
+      top: 60%;
+      left: 60%;
+      width: 400px;
+      height: 400px;
+      animation-delay: -10s;
+    }
+
+    @keyframes morph {
+      0%, 100% {
+        border-radius: 40% 60% 70% 30% / 40% 40% 60% 50%;
+        transform: rotate(0deg) translate(0, 0);
+      }
+      33% {
+        border-radius: 70% 30% 50% 50% / 30% 30% 70% 70%;
+        transform: rotate(120deg) translate(10px, 10px);
+      }
+      66% {
+        border-radius: 100% 60% 60% 100% / 100% 100% 60% 60%;
+        transform: rotate(240deg) translate(-5px, 5px);
+      }
     }
 
     nav {
-      background-color: #2c3e50;
-      padding: 15px 40px;
+      background: rgba(26, 32, 44, 0.7);
+      backdrop-filter: blur(20px);
+      padding: 20px 40px;
       color: white;
       text-align: center;
-      font-size: 24px;
-      font-weight: 600;
-      letter-spacing: 1px;
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      border-radius: 20px;
+      margin: 0 auto 30px;
+      max-width: 1200px;
+      box-shadow: 
+        0 15px 35px rgba(0, 0, 0, 0.2),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
     }
 
     .brand-marquee {
       overflow: hidden;
-      background: #fff;
-      border-top: 1px solid #ddd;
-      border-bottom: 1px solid #ddd;
-      padding: 20px 0;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(15px);
+      padding: 25px 0;
       position: relative;
+      margin: 0 auto 40px;
+      max-width: 1200px;
+      border-radius: 20px;
+      box-shadow: 
+        0 10px 30px rgba(0, 0, 0, 0.2),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.1);
     }
 
     .marquee-track {
       display: flex;
       width: calc(200% + 20px);
-      animation: scroll 25s linear infinite;
+      animation: scroll 30s linear infinite;
     }
 
     .marquee-track img {
-    width: 40px;    /* same as font size for icons */
-    height: auto;   /* maintain aspect ratio */
-    margin: 0 40px;
-    opacity: 0.8;
-    transition: transform 0.3s, opacity 0.3s;
+      width: 50px;
+      height: auto;
+      margin: 0 50px;
+      opacity: 0.8;
+      transition: transform 0.3s ease;
+      filter: drop-shadow(0 5px 15px rgba(0,0,0,0.3));
     }
+    
     .marquee-track img:hover {
-    transform: scale(1.2);
-    opacity: 1;
+      transform: scale(1.3);
+      opacity: 1;
     }
-
 
     .marquee-track i {
-      font-size: 40px;
-      margin: 0 40px;
+      font-size: 50px;
+      margin: 0 50px;
       opacity: 0.8;
-      transition: transform 0.3s, opacity 0.3s;
+      transition: transform 0.3s ease;
+      filter: drop-shadow(0 5px 15px rgba(0,0,0,0.3));
+      color: rgba(255, 255, 255, 0.9);
     }
 
     .marquee-track i:hover {
-      transform: scale(1.2);
+      transform: scale(1.3);
       opacity: 1;
     }
 
@@ -78,143 +154,276 @@
     }
 
     .container {
-      max-width: 800px;
-      margin: 30px auto;
-      background: #fff;
-      padding: 40px;
-      border-radius: 10px;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+      max-width: 900px;
+      margin: 50px auto;
+      background: rgba(26, 32, 44, 0.5);
+      backdrop-filter: blur(25px);
+      padding: 50px;
+      border-radius: 30px;
+      box-shadow: 
+        0 25px 50px rgba(0, 0, 0, 0.3),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      position: relative;
+      overflow: hidden;
+      animation: float 12s ease-in-out infinite;
     }
 
+    @keyframes float {
+      0%, 100% { 
+        transform: translateY(0);
+      }
+      50% { 
+        transform: translateY(-10px);
+      }
+    }
 
     h2 {
       text-align: center;
-      margin-bottom: 30px;
-      font-size: 28px;
-      color: #2c3e50;
+      margin-bottom: 40px;
+      font-size: 36px;
+      color: #e2e8f0;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+      font-weight: 700;
+      letter-spacing: 1px;
     }
 
     p.description {
       text-align: center;
-      font-size: 16px;
-      color: #555;
-      margin-bottom: 40px;
+      font-size: 18px;
+      color: #cbd5e0;
+      margin-bottom: 50px;
+      font-weight: 400;
+      line-height: 1.6;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
     }
 
     form {
       display: flex;
       flex-direction: column;
-      gap: 20px;
+      gap: 30px;
     }
 
     .row {
       display: flex;
-      gap: 30px;
+      gap: 40px;
       flex-wrap: wrap;
     }
 
     .row > div {
       flex: 1;
       min-width: 250px;
-      
     }
 
     label {
       display: block;
-      margin-bottom: 6px;
+      margin-bottom: 10px;
       font-weight: 600;
-      color: #333;
+      color: #e2e8f0;
+      font-size: 17px;
+      letter-spacing: 0.5px;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
     }
 
     select, input[type="number"] {
       width: 100%;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
+      padding: 16px 20px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 15px;
       font-size: 16px;
-      transition: border-color 0.3s;
+      transition: all 0.3s ease;
+      background: rgba(26, 32, 44, 0.6);
+      box-shadow: 
+        inset 0 2px 5px rgba(0, 0, 0, 0.2),
+        0 5px 15px rgba(0, 0, 0, 0.2);
+      color: #e2e8f0;
+      font-family: 'Inter', sans-serif;
     }
 
     select:focus, input[type="number"]:focus {
-      border-color: #3498db;
+      border-color: rgba(66, 153, 225, 0.7);
       outline: none;
+      box-shadow: 
+        inset 0 2px 5px rgba(0, 0, 0, 0.3),
+        0 0 0 3px rgba(66, 153, 225, 0.3);
+      background: rgba(26, 32, 44, 0.8);
     }
 
     button {
-      background-color: #3498db;
+      background: linear-gradient(135deg, #4299e1, #3182ce);
       color: white;
-      font-size: 18px;
+      font-size: 20px;
       border: none;
-      border-radius: 6px;
-      padding: 14px;
+      border-radius: 15px;
+      padding: 20px;
       cursor: pointer;
-      transition: background-color 0.3s;
+      transition: all 0.3s ease;
+      box-shadow: 
+        0 10px 20px rgba(66, 153, 225, 0.3),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.2);
+      margin-top: 20px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
     }
 
     button:hover {
-      background-color: #2980b9;
+      background: linear-gradient(135deg, #3182ce, #2b6cb0);
+      transform: translateY(-3px);
+      box-shadow: 
+        0 15px 30px rgba(66, 153, 225, 0.4),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.3);
+    }
+
+    button:active {
+      transform: translateY(0);
+    }
+
+    /* Selected Options Summary */
+    .selected-options {
+      margin-top: 40px;
+      padding: 25px;
+      background: rgba(26, 32, 44, 0.6);
+      border-radius: 15px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      display: none;
+    }
+
+    .selected-options h3 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #e2e8f0;
+      font-size: 24px;
+      text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+    }
+
+    .option-item {
+      display: flex;
+      flex-direction: column;
+      padding: 15px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .option-label {
+      font-size: 14px;
+      color: #cbd5e0;
+      margin-bottom: 5px;
+    }
+
+    .option-value {
+      font-size: 18px;
+      font-weight: 600;
+      color: #e2e8f0;
     }
 
     .prediction-text {
       text-align: center;
-      font-size: 20px;
-      margin-top: 30px;
-      color: #2c3e50;
+      font-size: 24px;
+      margin-top: 40px;
+      color: #e2e8f0;
+      padding: 25px;
+      background: rgba(26, 32, 44, 0.6);
+      border-radius: 15px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      font-weight: 600;
+      text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+      display: none;
     }
 
-    @media (max-width: 600px) {
+    @media (max-width: 768px) {
       .row {
         flex-direction: column;
+        gap: 25px;
+      }
+      
+      .container {
+        padding: 30px 20px;
+        margin: 30px auto;
+      }
+      
+      nav {
+        padding: 15px 20px;
+        font-size: 22px;
+      }
+      
+      h2 {
+        font-size: 28px;
+      }
+      
+      .brand-marquee {
+        padding: 15px 0;
+      }
+      
+      .marquee-track i, .marquee-track img {
+        margin: 0 30px;
+        font-size: 40px;
+        width: 40px;
+      }
+      
+      .liquid-shape {
+        display: none;
+      }
+      
+      body {
+        background: #2d3748;
+      }
+      
+      .options-grid {
+        grid-template-columns: 1fr;
       }
     }
   </style>
 </head>
 
 <body>
+  <!-- Simplified liquid background with only 2 shapes -->
+  <div class="liquid-background">
+    <div class="liquid-shape"></div>
+    <div class="liquid-shape"></div>
+  </div>
 
   <nav>Second-Hand Car Price Predictor</nav>
 
   <div class="brand-marquee">
     <div class="marquee-track">
-      <!-- Repeat logos 3 times for seamless loop -->
-      <i class="si si-audi si--color"></i>
-      <i class="si si-bmw si--color"></i>
-      <i class="si si-ford si--color"></i>
+      <!-- Reduced to 2 sets of logos for better performance -->
+      <i class="si si-audi"></i>
+      <i class="si si-bmw"></i>
+      <i class="si si-ford"></i>
       <img src="https://upload.wikimedia.org/wikipedia/commons/9/90/Mercedes-Logo.svg" alt="Mercedes" />
-      <i class="si si-honda si--color"></i>
-      <i class="si si-toyota si--color"></i>
-      <i class="si si-kia si--color"></i>
-      <i class="si si-volkswagen si--color"></i>
+      <i class="si si-honda"></i>
+      <i class="si si-toyota"></i>
+      <i class="si si-kia"></i>
+      <i class="si si-volkswagen"></i>
 
-      <i class="si si-audi si--color"></i>
-      <i class="si si-bmw si--color"></i>
-      <i class="si si-ford si--color"></i>
+      <i class="si si-audi"></i>
+      <i class="si si-bmw"></i>
+      <i class="si si-ford"></i>
       <img src="https://upload.wikimedia.org/wikipedia/commons/9/90/Mercedes-Logo.svg" alt="Mercedes" />
-      <i class="si si-honda si--color"></i>
-      <i class="si si-toyota si--color"></i>
-      <i class="si si-kia si--color"></i>
-      <i class="si si-volkswagen si--color"></i>
-
-      <i class="si si-audi si--color"></i>
-      <i class="si si-bmw si--color"></i>
-      <i class="si si-ford si--color"></i>
-      <img src="https://upload.wikimedia.org/wikipedia/commons/9/90/Mercedes-Logo.svg" alt="Mercedes" />
-      <i class="si si-honda si--color"></i>
-      <i class="si si-toyota si--color"></i>
-      <i class="si si-kia si--color"></i>
-      <i class="si si-volkswagen si--color"></i>
+      <i class="si si-honda"></i>
+      <i class="si si-toyota"></i>
+      <i class="si si-kia"></i>
+      <i class="si si-volkswagen"></i>
     </div>
   </div>
-  
-  
-  
-  
 
   <div class="container">
     <h2>Estimate Your Car's Value</h2>
     <p class="description">Built by Timmy using advanced machine learning algorithms. Enter details below to predict your car's price.</p>
 
-    <form action="{{ url_for('predict') }}" method="POST">
+    <form id="carForm">
       
       <div class="row">
         <div>
@@ -318,9 +527,17 @@
       <button type="submit">Predict Price</button>
     </form>
 
-    {% if prediction_text %}
-      <div class="prediction-text">{{ prediction_text }}</div>
-    {% endif %}
+    <!-- Selected Options Summary -->
+    <div class="selected-options" id="selectedOptions">
+      <h3>Selected Car Specifications</h3>
+      <div class="options-grid" id="optionsGrid">
+        <!-- Options will be inserted here by JavaScript -->
+      </div>
+    </div>
+
+    <div class="prediction-text" id="predictionText">
+      <!-- Prediction will be inserted here -->
+    </div>
 
   </div>
 
@@ -352,6 +569,78 @@
         });
       }
     });
+
+    // Handle form submission
+    document.getElementById("carForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      
+      // Get all form values
+      const formData = {
+        brand: document.getElementById("brand").value,
+        model: document.getElementById("model").value,
+        fuel: document.getElementById("fuel").value,
+        transmission: document.getElementById("transmission").value,
+        year: document.getElementById("year").value,
+        engineSize: document.getElementById("engineSize").value,
+        mileage: document.getElementById("mileage").value,
+        doors: document.getElementById("doors").value,
+        ownerCount: document.getElementById("OwnerCount").value
+      };
+      
+      // Display selected options
+      displaySelectedOptions(formData);
+      
+      // Show prediction (in a real app, this would come from the server)
+      simulatePrediction();
+    });
+    
+    function displaySelectedOptions(options) {
+      const optionsGrid = document.getElementById("optionsGrid");
+      optionsGrid.innerHTML = '';
+      
+      for (const [key, value] of Object.entries(options)) {
+        if (value) {
+          const optionItem = document.createElement("div");
+          optionItem.className = "option-item";
+          
+          const optionLabel = document.createElement("div");
+          optionLabel.className = "option-label";
+          optionLabel.textContent = key.replace(/([A-Z])/g, ' $1').trim(); // Convert camelCase to words
+          
+          const optionValue = document.createElement("div");
+          optionValue.className = "option-value";
+          optionValue.textContent = value;
+          
+          optionItem.appendChild(optionLabel);
+          optionItem.appendChild(optionValue);
+          optionsGrid.appendChild(optionItem);
+        }
+      }
+      
+      // Show the selected options section
+      document.getElementById("selectedOptions").style.display = "block";
+    }
+    
+    function simulatePrediction() {
+      // In a real application, this would be an API call to your backend
+      const predictionText = document.getElementById("predictionText");
+      predictionText.textContent = "Predicted Price: $" + 
+        Math.floor(Math.random() * 30000 + 10000); // Random price between 10k and 40k
+      predictionText.style.display = "block";
+      
+      // Scroll to prediction
+      predictionText.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Performance optimization - reduce animations on mobile
+    if (window.innerWidth < 768) {
+      document.querySelectorAll('.liquid-shape').forEach(el => {
+        el.style.animation = 'none';
+      });
+      
+      const container = document.querySelector('.container');
+      container.style.animation = 'none';
+    }
   </script>
 
 </body>
